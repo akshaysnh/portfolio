@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Akshay Sinha | RPA Developer & AI Automation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #F7F5F2;
+    --bg2: #EDEAE5;
+    --white: #FFFFFF;
+    --black: #0D0D0D;
+    --ink: #1A1A1A;
+    --ink2: #3D3D3D;
+    --muted: #888880;
+    --accent: #D4421A;       /* burnt orange-red accent */
+    --accent2: #1A3D8F;      /* deep blue secondary */
+    --border: #D8D4CE;
+    --border2: #EDEAE5;
+    --display: 'Playfair Display', serif;
+    --body: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--accent); }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem;
+    height: 68px;
+    background: rgba(247,245,242,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--black);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--black); }
+
+  /* ── LAYOUT ── */
+  .container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  section { padding: 7rem 0; }
+  section + section { border-top: 1px solid var(--border); }
+
+  .section-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--display);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 3rem;
+  }
+  .section-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 68px;
+    border-top: none;
+  }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    width: 100%;
+  }
+  .hero-left {}
+  .hero-tag {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--accent);
+  }
+  .hero-name {
+    font-family: var(--display);
+    font-size: clamp(3.5rem, 8vw, 6.5rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--black);
+    margin-bottom: 1.5rem;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-role {
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--ink2);
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-role strong { font-weight: 600; color: var(--black); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.8rem;
+    font-family: var(--body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.22s;
+    cursor: pointer;
+    letter-spacing: 0.01em;
+  }
+  .btn-primary { background: var(--black); color: var(--white); border: 1.5px solid var(--black); }
+  .btn-primary:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-2px); }
+  .btn-outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
+  .btn-outline:hover { background: var(--black); color: var(--white); transform: translateY(-2px); }
+
+  .hero-right {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .hero-stat-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .hero-stat {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .hero-stat-num {
+    font-family: var(--display);
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--black);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .hero-stat-num span { color: var(--accent); }
+  .hero-stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    font-weight: 400;
+  }
+  .hero-links {
+    display: flex; gap: 0.8rem;
+  }
+  .hero-link {
+    flex: 1;
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.9rem 1rem;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink2);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .hero-link:hover { border-color: var(--accent); color: var(--accent); }
+  .hero-link-icon { font-size: 1rem; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 5rem;
+    align-items: start;
+  }
+  .about-text p {
+    font-size: 1rem;
+    color: var(--ink2);
+    line-height: 1.9;
+    margin-bottom: 1.2rem;
+  }
+  .about-text p strong { color: var(--black); font-weight: 600; }
+  .about-text p em { color: var(--accent); font-style: normal; font-weight: 600; }
+
+  .info-list { display: flex; flex-direction: column; }
+  .info-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--border2);
+    gap: 1rem;
+  }
+  .info-item:first-child { border-top: 1px solid var(--border2); }
+  .info-key {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .info-val {
+    font-size: 0.88rem;
+    color: var(--ink);
+    font-weight: 500;
+    text-align: right;
+  }
+  .info-val a { color: var(--accent2); text-decoration: none; }
+  .info-val a:hover { text-decoration: underline; }
+
+  /* ── SKILLS ── */
+  #skills { background: var(--white); }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .skill-card {
+    background: var(--white);
+    padding: 2rem;
+    transition: background 0.2s;
+  }
+  .skill-card:hover { background: var(--bg); }
+  .skill-card-num {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--border2);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .skill-card-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .tag {
+    font-family: var(--mono);
+    font-size: 0.67rem;
+    padding: 0.2rem 0.55rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--ink2);
+  }
+  .tag.accent { background: rgba(212,66,26,0.07); border-color: rgba(212,66,26,0.2); color: var(--accent); }
+
+  /* ── PROJECTS ── */
+  .projects-list { display: flex; flex-direction: column; gap: 0; }
+  .project-item {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+    cursor: default;
+  }
+  .project-item:first-child { border-top: 1px solid var(--border); }
+  .project-item:hover .project-num { color: var(--accent); }
+  .project-num {
+    font-family: var(--display);
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--border);
+    line-height: 1;
+    transition: color 0.2s;
+    padding-top: 4px;
+  }
+  .project-body {}
+  .project-client-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .project-title {
+    font-family: var(--display);
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--ink2);
+    line-height: 1.8;
+    max-width: 560px;
+    margin-bottom: 1rem;
+  }
+  .project-impact {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: rgba(212,66,26,0.07);
+    border: 1px solid rgba(212,66,26,0.18);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+  }
+  .project-tech { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .project-year {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    white-space: nowrap;
+    padding-top: 6px;
+  }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--white); }
+  .timeline { position: relative; }
+  .tl-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid var(--border2);
+    position: relative;
+  }
+  .tl-item:first-child { border-top: 1px solid var(--border2); }
+  .tl-left {}
+  .tl-dates {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  .tl-company {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.3;
+    margin-bottom: 0.2rem;
+  }
+  .tl-location {
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+  .tl-right {}
+  .tl-role {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent2);
+    margin-bottom: 1rem;
+  }
+  .tl-points { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .tl-points li {
+    font-size: 0.87rem;
+    color: var(--ink2);
+    line-height: 1.7;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .tl-points li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+
+  /* ── CERTIFICATIONS ── */
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .cert-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 20px rgba(212,66,26,0.08);
+  }
+  .cert-issuer {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .cert-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--black);
+    line-height: 1.4;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    color: rgba(255,255,255,0.35);
+    padding: 3rem 2.5rem;
+  }
+  .footer-inner {
+    max-width: 1080px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-name {
+    font-family: var(--display);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-copy {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── FADE ── */
+  .fade-up {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { display: none; }
+    .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .skills-grid { grid-template-columns: 1fr 1fr; }
+    .project-item { grid-template-columns: 50px 1fr; }
+    .project-year { display: none; }
+    .tl-item { grid-template-columns: 1fr; gap: 0.5rem; }
+    .certs-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 560px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    .certs-grid { grid-template-columns: 1fr; }
+    .hero-stat-row { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">Akshay<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left fade-up">
+        <div class="hero-tag">RPA Developer & AI Automation Engineer</div>
+        <h1 class="hero-name">
+          Akshay<br>
+          <span class="accent">Sinha.</span>
+        </h1>
+        <p class="hero-role">
+          <strong>5+ years</strong> automating enterprise workflows with UiPath, Power Automate & AI/ML. From conversational agents to large-scale bot migrations — I build automation that actually works.
+        </p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="https://linkedin.com/in/akshay-sinha98" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+        </div>
+      </div>
+      <div class="hero-right fade-up" style="transition-delay:0.15s">
+        <div class="hero-stat-row">
+          <div class="hero-stat">
+            <div class="hero-stat-num">5<span>+</span></div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">40<span>+</span></div>
+            <div class="hero-stat-label">Bots Delivered</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">6</div>
+            <div class="hero-stat-label">Certifications</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">35<span>%</span></div>
+            <div class="hero-stat-label">Code Reusability Gain</div>
+          </div>
+        </div>
+        <div class="hero-links">
+          <a href="mailto:akshaysnh.sinha@gmail.com" class="hero-link">
+            <span class="hero-link-icon">✉</span> akshaysnh.sinha@gmail.com
+          </a>
+          <a href="tel:+918303013093" class="hero-link">
+            <span class="hero-link-icon">✆</span> +91-8303013093
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">01 — About</div>
+      <h2 class="section-title">Who I <em>am</em></h2>
+    </div>
+    <div class="about-grid fade-up">
+      <div class="about-text">
+        <p>I'm a <strong>Senior RPA Developer</strong> currently at <strong>FCM Travel India</strong>, where I build automation solutions that genuinely change how teams operate — from AI-powered conversational agents inside MS Teams to complex document understanding pipelines.</p>
+        <p>My work spans the full automation spectrum: <em>UI automation</em>, <em>API integration</em>, <em>Excel data processing</em>, and increasingly <em>AI/ML-driven intelligent automation</em> using UiPath's AI Center and Agentic frameworks.</p>
+        <p>I hold an <strong>M.Tech in Data and Computational Science from IIT Jodhpur</strong> — which bridges my deep RPA experience with a strong foundation in data science and machine learning. I've delivered production automation for global clients including <strong>Disney Parks</strong> and <strong>Warner Music Group</strong>.</p>
+        <p>Currently open to <strong>RPA Lead</strong> and <strong>AI/ML Automation Engineer</strong> roles.</p>
+      </div>
+      <div class="info-list">
+        <div class="info-item"><span class="info-key">Location</span><span class="info-val">Noida, India</span></div>
+        <div class="info-item"><span class="info-key">Current Role</span><span class="info-val">Senior RPA Developer @ FCM Travel</span></div>
+        <div class="info-item"><span class="info-key">Education</span><span class="info-val">M.Tech — IIT Jodhpur</span></div>
+        <div class="info-item"><span class="info-key">Specialization</span><span class="info-val">UiPath · Power Automate · AI/ML</span></div>
+        <div class="info-item"><span class="info-key">Target Roles</span><span class="info-val">RPA Lead / AI Automation Engineer</span></div>
+        <div class="info-item"><span class="info-key">LinkedIn</span><span class="info-val"><a href="https://linkedin.com/in/akshay-sinha98" target="_blank">akshay-sinha98 ↗</a></span></div>
+        <div class="info-item"><span class="info-key">Email</span><span class="info-val"><a href="mailto:akshaysnh.sinha@gmail.com">akshaysnh.sinha@gmail.com</a></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">02 — Skills</div>
+      <h2 class="section-title">Tech <em>Stack</em></h2>
+    </div>
+    <div class="skills-grid fade-up">
+      <div class="skill-card">
+        <div class="skill-card-num">01</div>
+        <div class="skill-card-title">RPA Platforms</div>
+        <div class="skill-tags">
+          <span class="tag accent">UiPath Studio</span>
+          <span class="tag accent">Automation Suite</span>
+          <span class="tag">Orchestrator</span>
+          <span class="tag">WorkFusion</span>
+          <span class="tag">Power Automate</span>
+          <span class="tag">CloverDX</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-num">02</div>
+        <div class="skill-card-title">AI / ML Automation</div>
+        <div class="skill-tags">
+          <span class="tag accent">AI Center</span>
+          <span class="tag accent">Document Understanding</span>
+          <span class="tag">Agentic Automation</span>
+          <span class="tag">Action Center</span>
+          <span class="tag">IDP</span>
+          <span class="tag">ML Integration</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-num">03</div>
+        <div class="skill-card-title">Automation Types</div>
+        <div class="skill-tags">
+          <span class="tag">UI Automation</span>
+          <span class="tag">API Automation</span>
+          <span class="tag">Excel Automation</span>
+          <span class="tag">Web Automation</span>
+          <span class="tag">Test Automation</span>
+          <span class="tag accent">Conversational Agents</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-num">04</div>
+        <div class="skill-card-title">Programming</div>
+        <div class="skill-tags">
+          <span class="tag">VB.Net</span>
+          <span class="tag">LINQ Query</span>
+          <span class="tag">Java</span>
+          <span class="tag">Selenium</span>
+          <span class="tag">REST APIs</span>
+          <span class="tag">Postman</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-num">05</div>
+        <div class="skill-card-title">Cloud & DevOps</div>
+        <div class="skill-tags">
+          <span class="tag">Azure DevOps</span>
+          <span class="tag">GitLab</span>
+          <span class="tag">Git</span>
+          <span class="tag">Cloud Technologies</span>
+          <span class="tag">Smartsheet</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-num">06</div>
+        <div class="skill-card-title">Methods & Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Agile</span>
+          <span class="tag">ReFramework</span>
+          <span class="tag">ODF Framework</span>
+          <span class="tag">SDD / BRD</span>
+          <span class="tag">Confluence</span>
+          <span class="tag">MS Visio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">03 — Projects</div>
+      <h2 class="section-title">Selected <em>Work</em></h2>
+    </div>
+    <div class="projects-list fade-up">
+
+      <div class="project-item">
+        <div class="project-num">01</div>
+        <div class="project-body">
+          <div class="project-client-tag">FCM Travel India · 2025</div>
+          <div class="project-title">Conversational Leave Management Agent</div>
+          <div class="project-desc">Built an AI-powered conversational agent inside MS Teams allowing employees to apply for leave through natural chat. Automated approval notifications to managers via MS Teams and Outlook. Smart logic automatically excludes weekends and public holidays from leave deductions. Deployed as a shared, team-wide tool requiring no individual setup.</div>
+          <div class="project-impact">↑ Zero deduction errors · Eliminated manual leave forms · Team-wide rollout</div>
+          <div class="project-tech">
+            <span class="tag">UiPath</span><span class="tag">Power Automate</span><span class="tag">MS Teams</span><span class="tag">Outlook</span><span class="tag">Agentic AI</span>
+          </div>
+        </div>
+        <div class="project-year">2025</div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-num">02</div>
+        <div class="project-body">
+          <div class="project-client-tag">Warner Music Group · 2022–2025</div>
+          <div class="project-title">Enterprise UI, API & Excel Automation Suite</div>
+          <div class="project-desc">Designed and delivered multiple production bots for Warner Music Group covering UI automation, REST API integration, and Excel data processing. Leveraged UiPath AI Center for intelligent document extraction across unstructured data sources.</div>
+          <div class="project-impact">↑ Significant reduction in manual processing · Improved data accuracy</div>
+          <div class="project-tech">
+            <span class="tag">UiPath</span><span class="tag">AI Center</span><span class="tag">REST API</span><span class="tag">Excel Automation</span><span class="tag">IDP</span>
+          </div>
+        </div>
+        <div class="project-year">2022–25</div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-num">03</div>
+        <div class="project-body">
+          <div class="project-client-tag">Disney Parks · 2021–2024</div>
+          <div class="project-title">WorkFusion → UiPath Migration & Re-engineering</div>
+          <div class="project-desc">Led end-to-end migration of Disney Parks' automation estate from WorkFusion to UiPath. Authored the Solution Design Document approved by stakeholders. Re-engineered bots using ReFramework for maximum reusability and performance across the entire bot portfolio.</div>
+          <div class="project-impact">↑ 30% efficiency gain · 35% code reusability · 25% faster development</div>
+          <div class="project-tech">
+            <span class="tag">UiPath</span><span class="tag">WorkFusion</span><span class="tag">ReFramework</span><span class="tag">SDD</span><span class="tag">UAT</span>
+          </div>
+        </div>
+        <div class="project-year">2021–24</div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-num">04</div>
+        <div class="project-body">
+          <div class="project-client-tag">FCM Travel India · 2025</div>
+          <div class="project-title">Azure DevOps Ticketing Automation</div>
+          <div class="project-desc">Built a Power Automate bot that monitors Smartsheet for project updates and automatically creates and routes tickets in Azure DevOps, eliminating manual ticket creation and improving real-time project tracking across the team.</div>
+          <div class="project-impact">↑ Zero manual ticket creation · Real-time project sync</div>
+          <div class="project-tech">
+            <span class="tag">Power Automate</span><span class="tag">Azure DevOps</span><span class="tag">Smartsheet</span>
+          </div>
+        </div>
+        <div class="project-year">2025</div>
+      </div>
+
+      <div class="project-item">
+        <div class="project-num">05</div>
+        <div class="project-body">
+          <div class="project-client-tag">Warner Music Group · 2025</div>
+          <div class="project-title">Process Efficiency Dashboard</div>
+          <div class="project-desc">Designed and built a real-time process efficiency dashboard with KPI tracking and automated reporting for automation operations, enabling data-driven decisions and SLA monitoring without manual effort.</div>
+          <div class="project-impact">↑ Real-time KPI visibility · Automated SLA reporting</div>
+          <div class="project-tech">
+            <span class="tag">UiPath Insights</span><span class="tag">Analytics</span><span class="tag">Automated Reporting</span>
+          </div>
+        </div>
+        <div class="project-year">2025</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">04 — Experience</div>
+      <h2 class="section-title">Career <em>Timeline</em></h2>
+    </div>
+    <div class="timeline fade-up">
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dates">Apr 2025 — Present</div>
+          <div class="tl-company">FCM Travel India</div>
+          <div class="tl-location">Noida, India</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-role">Senior RPA Developer</div>
+          <ul class="tl-points">
+            <li>Built a conversational AI leave management agent in MS Teams with smart holiday/weekend exclusion logic.</li>
+            <li>Led web and test automation projects; developed Azure DevOps ticketing automation via Power Automate.</li>
+            <li>Expanded integration capabilities with CloverDX and cross-tool automation workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dates">Jan 2025 — Mar 2025</div>
+          <div class="tl-company">Cognizant — Warner Music Group</div>
+          <div class="tl-location">Noida, India</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-role">Senior RPA Developer, Associate</div>
+          <ul class="tl-points">
+            <li>Automated Google Workspace processes (Drive, Sheets, Apps) without native UiPath activities.</li>
+            <li>Built real-time process efficiency dashboard with KPI tracking and automated SLA reporting.</li>
+            <li>Provided production support and continuous process optimization.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dates">Jun 2022 — Dec 2024</div>
+          <div class="tl-company">Cognizant — Disney, Warner Music Group</div>
+          <div class="tl-location">Pune, India</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-role">RPA Developer, Programmer Analyst</div>
+          <ul class="tl-points">
+            <li>Led WorkFusion → UiPath migration; authored stakeholder-approved SDD.</li>
+            <li>Improved code reusability by 35% and reduced development time by 25% via ReFramework.</li>
+            <li>Managed full SDLC: development, UAT, demos, production deployment and hypercare.</li>
+            <li>Mentored junior developers and created UiPath architecture documentation on Confluence.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-left">
+          <div class="tl-dates">Jun 2021 — Jun 2022</div>
+          <div class="tl-company">Cognizant — Disney Parks</div>
+          <div class="tl-location">Chennai, India</div>
+        </div>
+        <div class="tl-right">
+          <div class="tl-role">Programmer Analyst Trainee</div>
+          <ul class="tl-points">
+            <li>Delivered Disney Parks automation using WorkFusion — 30% efficiency gain, 25% fewer post-deploy issues.</li>
+            <li>Implemented ODF framework solutions; conducted API testing with Postman.</li>
+            <li>Gained hands-on Java and Selenium experience.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">05 — Certifications</div>
+      <h2 class="section-title">Credentials & <em>Certs</em></h2>
+    </div>
+    <div class="certs-grid fade-up">
+      <div class="cert-card">
+        <div class="cert-issuer">UiPath Certified Professional</div>
+        <div class="cert-name">Automation Solution Architect Professional</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">UiPath Certified Professional</div>
+        <div class="cert-name">Automation Developer Professional</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">UiPath Certified Professional</div>
+        <div class="cert-name">Agentic Automation Associate</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">UiPath Certified Professional</div>
+        <div class="cert-name">Automation Developer Associate</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Microsoft Certified</div>
+        <div class="cert-name">Power Platform Fundamentals (PL-900)</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">Workato Certified</div>
+        <div class="cert-name">Automation Pro I & II</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-name">Akshay Sinha</div>
+    <div class="footer-links">
+      <a href="mailto:akshaysnh.sinha@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/akshay-sinha98" target="_blank">LinkedIn</a>
+      <a href="tel:+918303013093">+91-8303013093</a>
+    </div>
+    <div class="footer-copy">© 2026 Akshay Sinha. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
